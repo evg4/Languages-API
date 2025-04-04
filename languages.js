@@ -1,8 +1,8 @@
 const express = require("express");
-const languagesRouter = express.Router();
-//const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
+
+const languagesRouter = express.Router();
 
 languagesRouter.use(morgan("tiny"));
 languagesRouter.use(bodyParser.json());
