@@ -14,7 +14,7 @@ const validateLanguage = (req, res, next) => {
     (lang) => lang.language === languageRequested
   );
   if (langIndex === -1) {
-    res.status(400).send("Language not found");
+    return res.status(400).send("Language not found");
   }
   req.langIndex = langIndex;
   next();
@@ -47,10 +47,9 @@ languagesRouter.post("", (req, res, next) => {
   );
   if (checkDuplicate === -1) {
     languages.push(newLang);
-    res.status(201).send(newLang);
-  } else {
-    res.status(403).send("That language already exists");
+    return res.status(201).send(newLang);
   }
+  return res.status(403).send("That language already exists");
 });
 
 //Update existing language
