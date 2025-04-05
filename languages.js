@@ -1,52 +1,12 @@
 const express = require("express");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
+const languages = require("./data/languagesData.js");
 
 const languagesRouter = express.Router();
 
 languagesRouter.use(morgan("tiny"));
 languagesRouter.use(bodyParser.json());
-
-const languages = [
-  {
-    language: "English",
-    romanAlphabet: true,
-    countries: ["UK", "USA", "Australia"],
-  },
-  {
-    language: "German",
-    romanAlphabet: true,
-    countries: ["Germany", "Austria", "Switzerland"],
-  },
-  {
-    language: "Spanish",
-    romanAlphabet: true,
-    countries: [
-      "Spain",
-      "Mexico",
-      "Chile",
-      "Peru",
-      "Costa Rica",
-      "Dominican Republic",
-      "Puerto Rico",
-    ],
-  },
-  {
-    language: "Italian",
-    romanAlphabet: true,
-    countries: ["Italy", "Switzerland"],
-  },
-  {
-    language: "Chinese",
-    romanAlphabet: false,
-    countries: ["China", "Hong Kong"],
-  },
-  {
-    language: "Russian",
-    romanAlphabet: false,
-    countries: "Russia",
-  },
-];
 
 const validateLanguage = (req, res, next) => {
   const languageRequested = req.params.language;
