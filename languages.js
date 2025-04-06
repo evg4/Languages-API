@@ -26,7 +26,7 @@ const saveLanguagesData = () => {
     JSON.stringify(languages, null, 2),
     (err) => {
       if (err) {
-        console.error("Error writing file:", err);
+        console.log("Error writing file: ", err);
       }
     }
   );
