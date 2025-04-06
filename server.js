@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const languagesRouter = require("./languages.js");
 const foodRouter = require("./food.js");
-const food = require("./data/foodData.js");
 
 app.use("/languages", languagesRouter);
 app.use("/food", foodRouter);

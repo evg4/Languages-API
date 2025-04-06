@@ -1,12 +1,34 @@
 const express = require("express");
 const morgan = require("morgan");
+const fs = require("fs");
 const bodyParser = require("body-parser");
-const languages = require("./data/languagesData.js");
+//const languages = require("./data/languagesData.js");
 
 const languagesRouter = express.Router();
 
+let languages = [];
+
+fs.readFile("./data/languagesData.json", (err, data) => {
+  if (err) {
+    throw err;
+  }
+  languages = JSON.parse(data);
+});
+
 languagesRouter.use(morgan("tiny"));
 languagesRouter.use(bodyParser.json());
+
+const saveLanguagesData = () => {
+  fs.writeFile(
+    "./data/languagesData.json",
+    JSON.stringify(languages, null, 2),
+    (err) => {
+      if (err) {
+        console.error("Error writing file:", err);
+      }
+    }
+  );
+};
 
 const validateLanguage = (req, res, next) => {
   const languageRequested = req.params.language;
@@ -47,6 +69,7 @@ languagesRouter.post("", (req, res, next) => {
   );
   if (checkDuplicate === -1) {
     languages.push(newLang);
+    saveLanguagesData();
     return res.status(201).send(newLang);
   }
   return res.status(403).send("That language already exists");
@@ -56,6 +79,7 @@ languagesRouter.post("", (req, res, next) => {
 languagesRouter.put("/:language", validateLanguage, (req, res, next) => {
   const newLang = req.body;
   languages[req.langIndex] = newLang;
+  saveLanguagesData();
   res.status(201).send(languages[req.langIndex]);
 });
 
