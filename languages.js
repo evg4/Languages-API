@@ -2,12 +2,13 @@ const express = require("express");
 const morgan = require("morgan");
 const fs = require("fs");
 const bodyParser = require("body-parser");
-//const languages = require("./data/languagesData.js");
 
 const languagesRouter = express.Router();
 
+//initialise languages array
 let languages = [];
 
+//read from the JSON file and save that into the languages array
 fs.readFile("./data/languagesData.json", (err, data) => {
   if (err) {
     throw err;
@@ -18,6 +19,7 @@ fs.readFile("./data/languagesData.json", (err, data) => {
 languagesRouter.use(morgan("tiny"));
 languagesRouter.use(bodyParser.json());
 
+//define logic to update the JSON file - to be used in PUT, POST and DELETE requests
 const saveLanguagesData = () => {
   fs.writeFile(
     "./data/languagesData.json",
@@ -30,6 +32,7 @@ const saveLanguagesData = () => {
   );
 };
 
+//middleware to check that the language in the request exists in the array
 const validateLanguage = (req, res, next) => {
   const languageRequested = req.params.language;
   const langIndex = languages.findIndex(
@@ -61,7 +64,7 @@ languagesRouter.get(
   }
 );
 
-//Add new language
+//Post - add new language
 languagesRouter.post("", (req, res, next) => {
   const newLang = req.body;
   const checkDuplicate = languages.findIndex(
@@ -75,7 +78,7 @@ languagesRouter.post("", (req, res, next) => {
   return res.status(403).send("That language already exists");
 });
 
-//Update existing language
+//Put - update existing language
 languagesRouter.put("/:language", validateLanguage, (req, res, next) => {
   const newLang = req.body;
   languages[req.langIndex] = newLang;
