@@ -8,18 +8,21 @@ This project has two small data sets - one called Languages and one called Food.
 Run the following command to clone the repository:
 
 ```bash
-git clone https://github.com/evg4/Languages-API.git```
+git clone https://github.com/evg4/Languages-API.git
+```
 
 ### 2. Install dependencies
 
 ```bash
 cd Languages-API
-npm install```
+npm install
+```
 
 ### 3. Start the server
 
 ```bash
-npm start```
+npm start
+```
 
 ### API endpoints
 
