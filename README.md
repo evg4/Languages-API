@@ -2,24 +2,24 @@
 Languages API
 ## Description 
 This project has two small data sets - one called Languages and one called Food. I built an Express server to allow API requests to interact with the data. Food only had GET requests; Languages also has some PUT and POST requests, which use the fs module to update the data in a JSON file. The purpose of this project was to practise building a server and using middleware. Some were imported, e.g. morgan and bodyParser, and some I created myself for use with my data specifically, e.g. validateLanguage. 
-## How to [install/run/] use
+## How to use
 ### 1. Clone the repository
 
 Run the following command to clone the repository:
 
 ```bash
-git clone https://github.com/evg4/Languages-API.git
+git clone https://github.com/evg4/Languages-API.git```
 
 ### 2. Install dependencies
 
 ```bash
 cd Languages-API
-npm install
+npm install```
 
 ### 3. Start the server
 
 ```bash
-npm start
+npm start```
 
 ### API endpoints
 
