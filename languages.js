@@ -57,7 +57,7 @@ languagesRouter.get("/:language", validateLanguage, (req, res, next) => {
 
 //Get countries by language
 languagesRouter.get(
-  "/countries/:language",
+  "/:language/countries",
   validateLanguage,
   (req, res, next) => {
     res.send(languages[req.langIndex].countries);
